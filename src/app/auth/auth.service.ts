@@ -1,21 +1,35 @@
 import { Injectable } from '@angular/core';
 import { AuthData } from './auth-data.model';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   loginUser(email: string, password: string) {
     const authData: AuthData = {
       email: email,
       password: password
     };
-    this.http.post('', authData).subscribe(response => {
+    this.http.post('http://localhost:3000/api/user', authData).subscribe(response => {
 
     });
+  }
+
+  createUser(email: string, password: string) {
+    const authData: AuthData = {
+      email: email,
+      password: password
+    };
+    this.http
+      .post('http://localhost:3000/api/user/signup', authData)
+      .subscribe(response => {
+        this.router.navigate(['/']);
+      }, error => {
+      });
   }
 }
