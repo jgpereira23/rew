@@ -11,6 +11,10 @@ export class AuthService {
   private isAuthenticated = false;
   constructor(private http: HttpClient, private router: Router) {}
 
+  getToken() {
+    return this.token;
+  }
+
   getIsAuth() {
     return this.isAuthenticated;
   }
@@ -29,6 +33,7 @@ export class AuthService {
         const token = response.token;
         this.token = token;
         if (this.token) {
+          this.isAuthenticated = true;
           alert('Logged in!');
         }
       });
