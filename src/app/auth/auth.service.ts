@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-
+  private token: string;
   constructor(private http: HttpClient, private router: Router) {}
 
   loginUser(email: string, password: string) {
@@ -15,9 +15,18 @@ export class AuthService {
       email: email,
       password: password
     };
-    this.http.post('http://localhost:3000/api/user', authData).subscribe(response => {
-
-    });
+    this.http
+      .post<{ token: string; expiresIn: Number; userId: string }>(
+        'http://localhost:3000/api/user/login',
+        authData
+      )
+      .subscribe(response => {
+        const token = response.token;
+        this.token = token;
+        if (this.token) {
+          alert('Logged in!');
+        }
+      });
   }
 
   createUser(email: string, password: string) {
@@ -25,11 +34,11 @@ export class AuthService {
       email: email,
       password: password
     };
-    this.http
-      .post('http://localhost:3000/api/user/signup', authData)
-      .subscribe(response => {
+    this.http.post('http://localhost:3000/api/user/signup', authData).subscribe(
+      response => {
         this.router.navigate(['/']);
-      }, error => {
-      });
+      },
+      error => {}
+    );
   }
 }
