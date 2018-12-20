@@ -1,21 +1,34 @@
 <mat-card>
-  <form [formGroup]="form" *ngIf="!isLoading">
+  <form (submit)="onSignup(signupForm)" #signupForm="ngForm">
     <mat-form-field>
       <input
-        matInput
-        type="email"
-        formControlName="email"
-        placeholder="Email Address">
-      <mat-error *ngIf="form.get('email').invalid">Please enter an email.</mat-error>
+      matInput
+      type="email"
+      name="email"
+      ngModel
+      #emailInput="ngModel"
+      required
+      email
+      placeholder="E-Mail"
+    />
+    <mat-error *ngIf="emailInput.invalid"
+      >Please enter a valid email.</mat-error
+    >
     </mat-form-field>
     <mat-form-field>
       <input
-        matInput
-        type="password"
-        formControlName="password"
-        placeholder="Password">
-      <mat-error *ngIf="form.get('password').invalid">Please enter a password.</mat-error>
+      type="password"
+      name="password"
+      ngModel
+      matInput
+      placeholder="Password"
+      #passwordInput="ngModel"
+      required
+    />
+      <mat-error *ngIf="passwordInput.invalid"
+        >Please enter a password.</mat-error
+      >
     </mat-form-field>
-    <button mat-raised-button color="accent" (click)="login()">Login</button>
+    <button mat-raised-button color="accent" type="submit">Signup</button>
   </form>
 </mat-card>
