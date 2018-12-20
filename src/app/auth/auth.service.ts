@@ -8,7 +8,12 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private token: string;
+  private isAuthenticated = false;
   constructor(private http: HttpClient, private router: Router) {}
+
+  getIsAuth() {
+    return this.isAuthenticated;
+  }
 
   loginUser(email: string, password: string) {
     const authData: AuthData = {
