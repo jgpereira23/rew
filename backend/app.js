@@ -22,7 +22,8 @@ mongoose
   .then(() => {
     console.log("Connected to database");
   })
-  .catch(() => {
+  .catch((error) => {
+    console.log(error);
     console.log("Connection failed");
   });
 
@@ -41,8 +42,6 @@ app.use((req, res, next) => {
   );
   next();
 });
-
-// xPsJz8t3Fq9eXiiw
 
 app.use("/api/user", userRoutes);
 
