@@ -11,7 +11,8 @@ import {
   MatCardModule,
   MatInputModule,
   MatSelectModule,
-  MatDialogModule
+  MatDialogModule,
+  MatStepperModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -50,6 +51,7 @@ import { ImageComponent } from './image-dialog/image.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatStepperModule,
     ReactiveFormsModule,
     HttpClientModule
   ],
