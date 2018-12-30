@@ -4,30 +4,154 @@
       <input
         matInput
         type="text"
-        formControlName="title"
-        placeholder="Posts Title">
-      <mat-error *ngIf="form.get('title').invalid">Please enter a post title.</mat-error>
+        formControlName="streetAddress"
+        placeholder="Street Address"
+      />
+      <mat-error *ngIf="form.get('streetAddress').invalid"
+        >Please enter a post title.</mat-error
+      >
     </mat-form-field>
     <mat-form-field>
-      <mat-select placeholder="Property Type">
-        <mat-option>None</mat-option>
-        <mat-option>House</mat-option>
-        <mat-option>Condominium</mat-option>
+      <input matInput type="text" formControlName="city" placeholder="City" />
+      <mat-error *ngIf="form.get('city').invalid"
+        >Please enter a post title.</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="number"
+        formControlName="zipCode"
+        placeholder="Zip Code"
+      />
+      <mat-error *ngIf="form.get('zipCode').invalid"
+        >Please enter a post title.</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="number"
+        formControlName="yearBuilt"
+        placeholder="Year Built"
+      />
+      <mat-error *ngIf="form.get('yearBuilt').invalid"
+        >Please enter a post title.</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="number"
+        formControlName="homeSquareFeet"
+        placeholder="Home Sq Ft"
+      />
+      <mat-error *ngIf="form.get('homeSquareFeet').invalid"
+        >Please enter a post title.</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="number"
+        formControlName="landSquareFeet"
+        placeholder="Land Sq Ft"
+      />
+      <mat-error *ngIf="form.get('landSquareFeet').invalid"
+        >Please enter a post title.</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select formControlName="propertyType" placeholder="Property Type">
+        <mat-option value="House">House</mat-option>
+        <mat-option value="Condominium">Condominium</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Property Cost" type="number" class="right-align">
-      <span matPrefix>$&nbsp;</span>
-      <span matSuffix>.00</span>
+      <mat-select formControlName="saleType" placeholder="Sale Type">
+        <mat-option value="By owner">By owner</mat-option>
+        <mat-option value="Bank owned">Bank owned</mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field>
-      <textarea
-        matInput
-        rows="4"
-        formControlName="content"
-        placeholder="Posts Content">
-      </textarea>
+      <mat-select formControlName="bedrooms" placeholder="Bedrooms">
+          <mat-option value="1">1</mat-option>
+          <mat-option value="1.5">1.5</mat-option>
+          <mat-option value="2">2</mat-option>
+          <mat-option value="2.5">2.5</mat-option>
+          <mat-option value="3">3</mat-option>
+          <mat-option value="3.5">3.5</mat-option>
+          <mat-option value="4">4</mat-option>
+          <mat-option value="4.5">4.5</mat-option>
+          <mat-option value="5">5</mat-option>
+          <mat-option value="5.5">5.5</mat-option>
+          <mat-option value="6">6</mat-option>
+      </mat-select>
     </mat-form-field>
+    <mat-form-field>
+      <mat-select formControlName="bathrooms" placeholder="Bathrooms">
+        <mat-option value="1">1</mat-option>
+        <mat-option value="1.5">1.5</mat-option>
+        <mat-option value="2">2</mat-option>
+        <mat-option value="2.5">2.5</mat-option>
+        <mat-option value="3">3</mat-option>
+        <mat-option value="3.5">3.5</mat-option>
+        <mat-option value="4">4</mat-option>
+        <mat-option value="4.5">4.5</mat-option>
+        <mat-option value="5">5</mat-option>
+        <mat-option value="5.5">5.5</mat-option>
+        <mat-option value="6">6</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Property Cost"
+        type="number"
+        class="right-align"
+        formControlName="price"
+      />
+      <span matPrefix>$&nbsp;</span> <span matSuffix>.00</span>
+    </mat-form-field>
+    <input
+      type="file"
+      #filePicker
+      (change)="onImagesSelected($event)"
+      multiple
+    />
+    <div class="image-container">
+      <div class="container">
+        <mat-card class="image-cards">
+          <div class="add-icon-wrapper">
+            <button
+              mat-icon-button
+              type="button"
+              (click)="filePicker.click()"
+              class="add-icon-button"
+            >
+              <mat-icon class="add-icon">add</mat-icon>
+            </button>
+          </div>
+        </mat-card>
+      </div>
+      <div
+        class="container"
+        *ngFor="let imagePreview of imagePreviews; let i = index"
+      >
+        <mat-card class="image-cards">
+          <img [src]="imagePreview" [alt]="form.value.title" class="image" />
+        </mat-card>
+        <div class="middle">
+          <button mat-raised-button color="accent" (click)="onImageView(i)">
+            View
+          </button>
+          <hr />
+          <button mat-raised-button color="warn" (click)="onImageRemoved(i)">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
     <button mat-raised-button color="accent" type="submit">Save Post</button>
   </form>
 </mat-card>
