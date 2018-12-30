@@ -10,7 +10,8 @@ import {
   MatListModule,
   MatCardModule,
   MatInputModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDialogModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { ImageComponent } from './image-dialog/image.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     MainNavComponent,
     CreateListingComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ImageComponent
   ],
   imports: [
     AppRoutingModule,
@@ -39,6 +42,7 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     MatToolbarModule,
     LayoutModule,
     FormsModule,
+    MatDialogModule,
     MatInputModule,
     MatSelectModule,
     MatCardModule,
@@ -50,6 +54,7 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     HttpClientModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ImageComponent]
 })
 export class AppModule {}
